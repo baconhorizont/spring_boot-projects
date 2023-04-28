@@ -1,0 +1,49 @@
+### SAVE NEW MACHINE
+POST http://localhost:8080/api/machines
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Okuma",
+  "type": "LATHE"
+}
+
+### LIST ALL MACHINE
+GET http://localhost:8080/api/machines/allMachines
+Content-Type: application/json
+Accept: application/json
+
+### ADD EMPLOYEE TO MACHINE
+POST http://localhost:8080/api/machines/addEmployee
+Content-Type: application/json
+Accept: application/json
+
+{
+  "machineId": "4",
+  "employeeId": "1"
+}
+
+### FIND MACHINE RUNNING JOBS
+GET http://localhost:8080/api/machines/runningJobs/1
+Content-Type: application/json
+Accept: application/json
+
+### LIST MACHINES BY TYPE
+GET http://localhost:8080/api/machines/allMachines?machineType=LATHE
+Content-Type: application/json
+Accept: application/json
+
+### REMOVE EMPLOYEE FROM MACHINE
+PUT http://localhost:8080/api/machines/removeEmployee
+Content-Type: application/json
+Accept: application/json
+
+{
+  "machineId": "1",
+  "employeeId": "1"
+}
+
+### REMOVE MACHINE
+DELETE http://localhost:8080/api/machines/remove/1
+Content-Type: application/json
+Accept: application/json

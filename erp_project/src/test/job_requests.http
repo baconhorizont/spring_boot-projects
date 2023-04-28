@@ -1,0 +1,61 @@
+### SAVE NEW JOB
+POST http://localhost:8080/api/jobs
+Content-Type: application/json
+Accept: application/json
+
+{
+  "customer": "p-form",
+  "orderDate": "2022-05-10",
+  "deadline": "2023-05-01",
+  "orderType": "STANDARD",
+  "estimatedMachiningHours": 250
+}
+
+### LIST ALL JOB
+GET http://localhost:8080/api/jobs/allJobs
+Content-Type: application/json
+Accept: application/json
+
+### ADD MACHINE TO JOB
+POST http://localhost:8080/api/jobs/addMachine
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "1",
+  "machineId": "4"
+}
+
+### ADD MACHINING HOURS TO JOB
+POST http://localhost:8080/api/jobs/addMachiningHours
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "1",
+  "machineId": "1",
+  "hours": 10
+}
+
+### UPDATE JOB STATUS
+PUT http://localhost:8080/api/jobs/updateStatus
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "5",
+  "jobStatus": "FINISHED"
+}
+
+### LIST MEPLOYEES MADE JOB BY JOB ID
+GET http://localhost:8080/api/jobs/1/madeByEmployee
+Content-Type: application/json
+Accept: application/json
+
+### GET ALL COST BETWEEN DATE
+GET http://localhost:8080/api/jobs/allCost?endDate=2023-05-01
+Content-Type: application/json
+Accept: application/json
+
+### FIND JOB BY ID
+GET http://localhost:8080/api/jobs/id/1

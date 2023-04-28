@@ -1,0 +1,73 @@
+### SAVE NEW EMPLOYEE
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Roland",
+  "qualification": "MILLING"
+}
+
+### SAVE NEW MACHINE
+POST http://localhost:8080/api/machines
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Hermle",
+  "type": "MILL"
+}
+
+### ADD EMPLOYEE TO MACHINE
+POST http://localhost:8080/api/machines/addEmployee
+Content-Type: application/json
+Accept: application/json
+
+{
+  "machineId": "1",
+  "employeeId": "1"
+}
+
+### SAVE NEW JOB
+POST http://localhost:8080/api/jobs
+Content-Type: application/json
+Accept: application/json
+
+{
+  "customer": "Robert Bosch Gmbh",
+  "orderDate": "2022-05-10",
+  "deadline": "2023-05-01",
+  "orderType": "STANDARD",
+  "estimatedMachiningHours": 250
+}
+
+### ADD MACHINE TO JOB
+POST http://localhost:8080/api/jobs/addMachine
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "1",
+  "machineId": "1"
+}
+
+### UPDATE JOB STATUS
+PUT http://localhost:8080/api/jobs/updateStatus
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "1",
+  "jobStatus": "RUNNING"
+}
+
+### ADD MACHINING HOURS TO JOB
+POST http://localhost:8080/api/jobs/addMachiningHours
+Content-Type: application/json
+Accept: application/json
+
+{
+  "jobId": "2",
+  "machineId": "1",
+  "hours": 10
+}

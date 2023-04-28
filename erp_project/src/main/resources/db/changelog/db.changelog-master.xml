@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-movies-table" author="bacon">
+        <sqlFile path="create-jobs-table.sql"
+                 relativeToChangelogFile="true" />
+    </changeSet>
+    <changeSet id="create-employees-table" author="bacon">
+        <sqlFile path="create-employees-table.sql"
+                 relativeToChangelogFile="true" />
+    </changeSet>
+    <changeSet id="create-machines-table" author="bacon">
+        <sqlFile path="create-machines-table.sql"
+                 relativeToChangelogFile="true" />
+    </changeSet>
+    <changeSet id="create-connection-tables" author="bacon">
+        <sqlFile path="create-jobs-machines-connection-table.sql"
+                 relativeToChangelogFile="true" />
+        <sqlFile path="create-machines-employees-connection-table.sql"
+                 relativeToChangelogFile="true" />
+    </changeSet>
+    <changeSet id="create_spent_machining_hours_by_type" author="bacon">
+        <sqlFile path="create_spent_machining_hours_by_type.sql"
+                 relativeToChangelogFile="true" />
+    </changeSet>
+</databaseChangeLog>

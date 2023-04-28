@@ -1,0 +1,46 @@
+### SAVE NEW EMPLOYEE
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Feri",
+  "qualification": "TURNING"
+}
+
+### LIST ALL EMPLOYEE
+GET http://localhost:8080/api/employees/allEmployees
+Content-Type: application/json
+Accept: application/json
+
+### FIND EMPLOYEE BY NAME
+GET http://localhost:8080/api/employees/allEmployees?nameFragment=r
+Content-Type: application/json
+Accept: application/json
+
+### FIND EMPLOYEE BY QUALIFICATION
+GET http://localhost:8080/api/employees/allEmployees?qualification=TURNING
+Content-Type: application/json
+Accept: application/json
+
+### FIND EMPLOYEE BY NAME AND QUALIFICATION
+GET http://localhost:8080/api/employees/allEmployees?nameFragment=r&qualification=TURNING
+Content-Type: application/json
+Accept: application/json
+
+### FIND EMPLOYEE BY ID
+GET http://localhost:8080/api/employees/id/3
+
+### DELETE EMPLOYEE BY ID
+DELETE http://localhost:8080/api/employees/remove/1
+
+### UPDATE EMPLOYEE
+PUT http://localhost:8080/api/employees/update
+Content-Type: application/json
+Accept: application/json
+
+{
+  "id": 1,
+  "name": "Peti",
+  "qualification": "asd"
+}
