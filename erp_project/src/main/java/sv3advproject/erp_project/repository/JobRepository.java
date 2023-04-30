@@ -17,7 +17,7 @@ public interface JobRepository extends JpaRepository<Job,Long> {
     List<Job> findByCustomerAndStatus(@Param("customer") Optional<String> customer,@Param("jobStatus") Optional<JobStatus> jobStatus);
     @Query("select distinct m from Machine m left join fetch m.runningJob j where j.id = :jobId")
     List<Machine> findJobByIdMadeByEmployee(@Param("jobId") long jobId);
-    @Query("select distinct j from Job j left join fetch j.machinedOn m where m.id = :machineId")
+    @Query("select distinct j from Job j left join fetch j.machinedOn m where m.id = :machineId order by j.deadline")
     List<Job> findJobByMachineId(@Param("machineId") long machineId);
     @Query("select sum(j.cost) from Job j where (:startDate is null or j.deadline >= :startDate) and (:endDate is null or j.deadline <= :endDate)")
     Optional<Double> getAllCostBetweenDate(@Param("startDate") Optional<LocalDate> startDate,@Param("endDate") Optional<LocalDate> endDate);

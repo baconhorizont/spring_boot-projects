@@ -4,18 +4,17 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Entity
 @Table(name = "jobs")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Job {
+@ToString
+public class Job implements Comparable<Job> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +47,7 @@ public class Job {
             joinColumns=@JoinColumn(name="job_id"),
             inverseJoinColumns=@JoinColumn(name="machine_id"))
     @ToString.Exclude
-    private List<Machine> machinedOn = new ArrayList<>();
+    private Set<Machine> machinedOn = new HashSet<>();
 
     public void addMachine(Machine machine){
         machinedOn.add(machine);
@@ -68,5 +67,23 @@ public class Job {
 
         spentMachiningHours += hours;
         cost += machineType.getOverheadCharge() * hours * orderType.getMultiplier();
+    }
+
+    @Override
+    public int compareTo(Job otherJob) {
+        return this.deadline.compareTo(otherJob.getDeadline());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Job job = (Job) o;
+        return id.equals(job.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

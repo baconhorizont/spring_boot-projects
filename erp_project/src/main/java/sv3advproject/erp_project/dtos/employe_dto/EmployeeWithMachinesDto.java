@@ -4,7 +4,7 @@ import lombok.Data;
 import sv3advproject.erp_project.dtos.machine_dto.MachineDto;
 import sv3advproject.erp_project.models.EmployeeQualification;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class EmployeeWithMachinesDto {
@@ -12,5 +12,5 @@ public class EmployeeWithMachinesDto {
     private Long id;
     private String name;
     private EmployeeQualification qualification;
-    private List<MachineDto> canWorkOn;
+    private Set<MachineDto> canWorkOn;
 }

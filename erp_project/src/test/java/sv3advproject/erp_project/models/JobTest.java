@@ -5,8 +5,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,11 +26,11 @@ class JobTest {
                 .deadline(LocalDate.now().plusMonths(1))
                 .orderType(OrderType.STANDARD)
                 .estimatedMachiningHours(200)
-                .machinedOn(new ArrayList<>())
+                .machinedOn(new HashSet<>())
                 .spentMachiningHoursByType(new HashMap<>())
                 .build();
 
-        jobStandard.addMachine(Machine.builder().name("Hermle").type(MachineType.MILL).runningJob(new ArrayList<>()).build());
+        jobStandard.addMachine(Machine.builder().name("Hermle").type(MachineType.MILL).runningJob(new TreeSet<>()).build());
 
         jobPriority = Job.builder()
                 .id(1L)
@@ -38,11 +39,11 @@ class JobTest {
                 .deadline(LocalDate.now().plusMonths(1))
                 .orderType(OrderType.PRIORITY)
                 .estimatedMachiningHours(200)
-                .machinedOn(new ArrayList<>())
+                .machinedOn(new HashSet<>())
                 .spentMachiningHoursByType(new HashMap<>())
                 .build();
 
-        jobPriority.addMachine(Machine.builder().name("Okuma").type(MachineType.LATHE).runningJob(new ArrayList<>()).build());
+        jobPriority.addMachine(Machine.builder().name("Okuma").type(MachineType.LATHE).runningJob(new TreeSet<>()).build());
     }
 
     @Test

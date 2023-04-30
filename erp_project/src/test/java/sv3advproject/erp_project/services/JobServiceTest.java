@@ -17,9 +17,7 @@ import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -47,7 +45,7 @@ class JobServiceTest {
                 .id(1L)
                 .name("Hermle")
                 .type(MachineType.MILL)
-                .runningJob(new ArrayList<>())
+                .runningJob(new TreeSet<>())
                 .build();
 
         job = Job.builder()
@@ -58,7 +56,7 @@ class JobServiceTest {
                 .orderType(OrderType.STANDARD)
                 .estimatedMachiningHours(200)
                 .status(JobStatus.NEW)
-                .machinedOn(new ArrayList<>())
+                .machinedOn(new HashSet<>())
                 .spentMachiningHoursByType(new HashMap<>())
                 .build();
 

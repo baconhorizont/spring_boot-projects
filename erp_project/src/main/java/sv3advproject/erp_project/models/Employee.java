@@ -3,12 +3,12 @@ package sv3advproject.erp_project.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "employees")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -22,5 +22,18 @@ public class Employee {
     private EmployeeQualification qualification;
     @ManyToMany(mappedBy = "canUse")
     @ToString.Exclude
-    private List<Machine> canWorkOn = new ArrayList<>();
+    private Set<Machine> canWorkOn = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id.equals(employee.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

@@ -5,7 +5,7 @@ import lombok.ToString;
 import sv3advproject.erp_project.dtos.employe_dto.EmployeeDto;
 import sv3advproject.erp_project.models.MachineType;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class MachineWithEmpCanUseDto {
@@ -14,5 +14,5 @@ public class MachineWithEmpCanUseDto {
     private String name;
     private MachineType type;
     @ToString.Exclude
-    private List<EmployeeDto> canUse;
+    private Set<EmployeeDto> canUse;
 }

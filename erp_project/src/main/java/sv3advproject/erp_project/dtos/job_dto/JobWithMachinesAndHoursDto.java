@@ -8,8 +8,8 @@ import sv3advproject.erp_project.models.MachineType;
 import sv3advproject.erp_project.models.OrderType;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Data
 public class JobWithMachinesAndHoursDto {
@@ -26,5 +26,5 @@ public class JobWithMachinesAndHoursDto {
     @ToString.Exclude
     private Map<MachineType,Integer> spentMachiningHoursByType;
     @ToString.Exclude
-    private List<MachineDto> machinedOn;
+    private Set<MachineDto> machinedOn;
 }

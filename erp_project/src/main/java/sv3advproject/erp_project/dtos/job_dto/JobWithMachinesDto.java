@@ -7,7 +7,7 @@ import sv3advproject.erp_project.models.JobStatus;
 import sv3advproject.erp_project.models.OrderType;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class JobWithMachinesDto {
@@ -22,5 +22,5 @@ public class JobWithMachinesDto {
     private int spentMachiningHours;
     private JobStatus status;
     @ToString.Exclude
-    private List<MachineDto> machinedOn;
+    private Set<MachineDto> machinedOn;
 }

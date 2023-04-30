@@ -18,8 +18,7 @@ import sv3advproject.erp_project.repository.EmployeeRepository;
 import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -47,6 +46,9 @@ public class MachineService {
         Employee employee = findEmployeeById(command.getEmployeeId());
         if(!machine.getType().toString().equals(employee.getQualification().getRequires())){
             throw new EmployeeNotQualifiedException(employee.getId());
+        }
+        if(machine.getCanUse().contains(employee)){
+            throw new IllegalArgumentException();
         }
         machine.addEmployee(employee);
         return machineMapper.toDtoWithEmp(machine);
@@ -92,4 +94,5 @@ public class MachineService {
         return machineRepository.findById(machineId)
                 .orElseThrow(()-> new MachineNotFoundException(machineId));
     }
+
 }

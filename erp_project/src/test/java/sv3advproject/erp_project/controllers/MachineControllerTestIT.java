@@ -40,6 +40,7 @@ class MachineControllerTestIT {
     EmployeeDto savedEmployeeTurn;
     MachineDto savedMachine;
     JobDto savedJob;
+    JobDto savedJob2;
 
     @BeforeEach
     void initDb(){
@@ -392,6 +393,17 @@ class MachineControllerTestIT {
         client.post()
                 .uri("/api/jobs/addMachine")
                 .bodyValue(AddMachineToJobCommand.builder()
+                        .jobId(savedJob2.getId())
+                        .machineId(savedMachine.getId())
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(201)
+                .expectBody(JobWithMachinesDto.class)
+                .returnResult().getResponseBody();
+
+        client.post()
+                .uri("/api/jobs/addMachine")
+                .bodyValue(AddMachineToJobCommand.builder()
                         .jobId(savedJob.getId())
                         .machineId(savedMachine.getId())
                         .build())
@@ -408,9 +420,9 @@ class MachineControllerTestIT {
                 .returnResult().getResponseBody();
 
         assertThat(result)
-                .hasSize(1)
+                .hasSize(2)
                 .extracting(JobDto::getCustomer)
-                .containsOnly("Z-form Szerszámgyártó Kft.");
+                .containsExactly("Z-form Szerszámgyártó Kft.","M+E Kft");
     }
 
     @Test
@@ -489,5 +501,21 @@ class MachineControllerTestIT {
                 .expectStatus().isEqualTo(201)
                 .expectBody(JobDto.class)
                 .returnResult().getResponseBody();
+
+        savedJob2 = client.post()
+                .uri("/api/jobs")
+                .bodyValue(CreateJobCommand.builder()
+                        .customer("M+E Kft")
+                        .orderDate(LocalDate.now().minusDays(1))
+                        .deadline(LocalDate.now().plusMonths(5))
+                        .orderType(OrderType.STANDARD)
+                        .estimatedMachiningHours(100)
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(201)
+                .expectBody(JobDto.class)
+                .returnResult().getResponseBody();
     }
+
+
 }

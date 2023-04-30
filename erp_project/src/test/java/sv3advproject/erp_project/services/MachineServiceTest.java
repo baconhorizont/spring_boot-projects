@@ -25,7 +25,7 @@ import sv3advproject.erp_project.repository.EmployeeRepository;
 import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -54,14 +54,14 @@ class MachineServiceTest {
                         .id(1L)
                         .name("Hermle")
                         .type(MachineType.MILL)
-                        .canUse(new ArrayList<>())
+                        .canUse(new HashSet<>())
                         .build()));
         when(employeeRepository.findById(anyLong()))
                 .thenReturn(Optional.of(Employee.builder()
                         .id(1L)
                         .name("Nagy Roland")
                         .qualification(EmployeeQualification.MILLING)
-                        .canWorkOn(new ArrayList<>())
+                        .canWorkOn(new HashSet<>())
                         .build()));
 
         MachineWithEmpCanUseDto result = machineService.addEmployeeToMachine(AddEmpToMachineCommand.builder()
@@ -87,14 +87,14 @@ class MachineServiceTest {
                         .id(1L)
                         .name("Hermle")
                         .type(MachineType.MILL)
-                        .canUse(new ArrayList<>())
+                        .canUse(new HashSet<>())
                         .build()));
         when(employeeRepository.findById(anyLong()))
                 .thenReturn(Optional.of(Employee.builder()
                         .id(1L)
                         .name("Iglói Péter")
                         .qualification(EmployeeQualification.TURNING)
-                        .canWorkOn(new ArrayList<>())
+                        .canWorkOn(new HashSet<>())
                         .build()));
 
         assertThatThrownBy(()->machineService.addEmployeeToMachine(AddEmpToMachineCommand.builder()
