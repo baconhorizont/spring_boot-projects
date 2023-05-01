@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sv3advproject.erp_project.dtos.job_dto.JobDto;
 import sv3advproject.erp_project.dtos.machine_dto.*;
+import sv3advproject.erp_project.exceptions.EmployeeAlreadyAddedException;
 import sv3advproject.erp_project.exceptions.EmployeeNotFoundException;
 import sv3advproject.erp_project.exceptions.EmployeeNotQualifiedException;
 import sv3advproject.erp_project.exceptions.MachineNotFoundException;
@@ -48,7 +49,7 @@ public class MachineService {
             throw new EmployeeNotQualifiedException(employee.getId());
         }
         if(machine.getCanUse().contains(employee)){
-            throw new IllegalArgumentException();
+            throw new EmployeeAlreadyAddedException(command.getEmployeeId(),command.getMachineId());
         }
         machine.addEmployee(employee);
         return machineMapper.toDtoWithEmp(machine);

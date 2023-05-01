@@ -176,6 +176,37 @@ class MachineControllerTestIT {
     }
 
     @Test
+    @DisplayName("Test add employee to machine, same employee")
+    void testAddEmployeeToMachineSame(){
+        client.post()
+                .uri("/api/machines/addEmployee")
+                .bodyValue(AddEmpToMachineCommand.builder()
+                        .machineId(savedMachine.getId())
+                        .employeeId(savedEmployeeMill1.getId())
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(201)
+                .expectBody(MachineWithEmpCanUseDto.class)
+                .returnResult().getResponseBody();
+
+        ProblemDetail result = client.post()
+                .uri("/api/machines/addEmployee")
+                .bodyValue(AddEmpToMachineCommand.builder()
+                        .machineId(savedMachine.getId())
+                        .employeeId(savedEmployeeMill1.getId())
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(400)
+                .expectBody(ProblemDetail.class)
+                .returnResult().getResponseBody();
+
+        assertEquals(URI.create("machines/employee-already-added"),result.getType());
+        assertEquals(String.format("Employee already added id: %d to this machine id: %d",
+                        savedEmployeeMill1.getId(),savedMachine.getId()),
+                result.getDetail());
+    }
+
+    @Test
     @DisplayName("Exception Test add employee to machine without qualification")
     void testAddEmployeeToMachineWithoutQualification(){
         ProblemDetail result = client.post()
