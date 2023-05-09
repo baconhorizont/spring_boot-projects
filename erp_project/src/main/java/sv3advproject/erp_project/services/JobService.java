@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import sv3advproject.erp_project.dtos.employe_dto.EmployeeDto;
 import sv3advproject.erp_project.dtos.job_dto.*;
-import sv3advproject.erp_project.exceptions.JobNotFoundException;
-import sv3advproject.erp_project.exceptions.JobNotRunningException;
-import sv3advproject.erp_project.exceptions.MachineNotAddedException;
-import sv3advproject.erp_project.exceptions.MachineNotFoundException;
+import sv3advproject.erp_project.exceptions.*;
 import sv3advproject.erp_project.mappers.EmployeeMapper;
 import sv3advproject.erp_project.mappers.JobMapper;
 import sv3advproject.erp_project.models.Employee;
@@ -48,6 +45,9 @@ public class JobService {
     public JobWithMachinesDto addMachineToJob(AddMachineToJobCommand command) {
         Job job = findJobById(command.getJobId());
         Machine machine = findMachineById(command.getMachineId());
+        if(job.getMachinedOn().contains(machine)){
+            throw new MachineAlreadyAddedException(machine.getId(),job.getId());
+        }
         job.addMachine(machine);
         return jobMapper.withMachines(job);
     }

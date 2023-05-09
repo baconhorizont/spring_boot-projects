@@ -277,6 +277,35 @@ class JobControllerTestIT {
     }
 
     @Test
+    @DisplayName("Exception Test add machine to job, same machine")
+    void testAddMachineToJobSameMachine() {
+        client.post()
+                .uri("/api/jobs/addMachine")
+                .bodyValue(AddMachineToJobCommand.builder()
+                        .jobId(savedJob.getId())
+                        .machineId(savedMachine.getId())
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(201)
+                .expectBody(JobWithMachinesDto.class)
+                .returnResult().getResponseBody();
+
+        ProblemDetail result = client.post()
+                .uri("/api/jobs/addMachine")
+                .bodyValue(AddMachineToJobCommand.builder()
+                        .jobId(savedJob.getId())
+                        .machineId(savedMachine.getId())
+                        .build())
+                .exchange()
+                .expectStatus().isEqualTo(400)
+                .expectBody(ProblemDetail.class)
+                .returnResult().getResponseBody();
+
+        assertEquals(URI.create("jobs/machine-already-added"), result.getType());
+        assertEquals(String.format("Machine already added id: %d to this job id: %d",savedMachine.getId(),savedJob.getId()),result.getDetail());
+    }
+
+    @Test
     @DisplayName("Exception Test add machine to job, job not exist")
     void testAddMachineToJobJobNotFound() {
         ProblemDetail result = client.post()

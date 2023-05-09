@@ -12,6 +12,13 @@ import java.net.URI;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(MachineAlreadyAddedException.class)
+    public ProblemDetail handleMachineAlreadyAddedException(MachineAlreadyAddedException e){
+        ProblemDetail detail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
+        detail.setType(URI.create("jobs/machine-already-added"));
+        return detail;
+    }
+
     @ExceptionHandler(EmployeeAlreadyAddedException.class)
     public ProblemDetail handleEmployeeAlreadyAddedException(EmployeeAlreadyAddedException e){
         ProblemDetail detail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
