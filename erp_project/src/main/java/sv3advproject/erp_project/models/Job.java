@@ -19,7 +19,8 @@ public class Job implements Comparable<Job> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String customer;
+    @ManyToOne
+    private Customer customer;
     @Column(name = "order_date")
     private LocalDate orderDate;
     @Column(name = "dead_line")
