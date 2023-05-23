@@ -12,6 +12,7 @@ import sv3advproject.erp_project.models.Employee;
 import sv3advproject.erp_project.models.Job;
 import sv3advproject.erp_project.models.JobStatus;
 import sv3advproject.erp_project.models.Machine;
+import sv3advproject.erp_project.repository.CustomerRepository;
 import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
 
@@ -26,6 +27,7 @@ public class JobService {
     private static final JobStatus INITIAL_JOB_STATUS = JobStatus.NEW;
 
     private JobRepository jobRepository;
+    private CustomerRepository customerRepository;
     private MachineRepository machineRepository;
     private JobMapper jobMapper;
     private EmployeeMapper employeeMapper;
@@ -96,7 +98,7 @@ public class JobService {
 
     private Job buildJob(CreateJobCommand command) {
         return Job.builder()
-                .customer(command.getCustomer())
+                .customer(customerRepository.findByNameWithJobs(command.getCustomer()))
                 .orderDate(command.getOrderDate())
                 .deadline(command.getDeadline())
                 .orderType(command.getOrderType())

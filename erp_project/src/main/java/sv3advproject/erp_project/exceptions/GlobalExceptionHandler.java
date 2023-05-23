@@ -12,6 +12,13 @@ import java.net.URI;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(CustomerNotFoundException.class)
+    public ProblemDetail handleCustomerNotFoundException(CustomerNotFoundException e){
+        ProblemDetail detail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        detail.setType(URI.create("customers/customer-not-found"));
+        return detail;
+    }
+
     @ExceptionHandler(MachineAlreadyAddedException.class)
     public ProblemDetail handleMachineAlreadyAddedException(MachineAlreadyAddedException e){
         ProblemDetail detail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());

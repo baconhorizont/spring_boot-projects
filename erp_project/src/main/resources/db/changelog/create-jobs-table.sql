@@ -8,5 +8,7 @@ create table jobs (
     cost double,
     spent_machining_hours int,
     job_status varchar (255),
-    primary key (id)
+    customer_id bigint not null,
+    primary key (id),
+    foreign key (customer_id) references customers(id)
 );
