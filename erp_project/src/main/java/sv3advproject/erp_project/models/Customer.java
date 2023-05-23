@@ -24,10 +24,21 @@ public class Customer {
     private String vatNumber;
     private LocalDate registrationDate;
     private Address address;
+    @Enumerated(EnumType.STRING)
     private Currency currency;
     @OneToMany(mappedBy = "customer")
     @ToString.Exclude
     private Set<Job> jobs = new HashSet<>();
+
+    public void addJob(Job job){
+        jobs.add(job);
+        job.setCustomer(this);
+    }
+
+    public void removeJob(Job job){
+        jobs.remove(job);
+        job.setCustomer(null);
+    }
 
     @Override
     public boolean equals(Object o) {

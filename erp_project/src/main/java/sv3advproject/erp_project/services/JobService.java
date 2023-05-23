@@ -8,10 +8,7 @@ import sv3advproject.erp_project.dtos.job_dto.*;
 import sv3advproject.erp_project.exceptions.*;
 import sv3advproject.erp_project.mappers.EmployeeMapper;
 import sv3advproject.erp_project.mappers.JobMapper;
-import sv3advproject.erp_project.models.Employee;
-import sv3advproject.erp_project.models.Job;
-import sv3advproject.erp_project.models.JobStatus;
-import sv3advproject.erp_project.models.Machine;
+import sv3advproject.erp_project.models.*;
 import sv3advproject.erp_project.repository.CustomerRepository;
 import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
@@ -98,13 +95,18 @@ public class JobService {
 
     private Job buildJob(CreateJobCommand command) {
         return Job.builder()
-                .customer(customerRepository.findByNameWithJobs(command.getCustomer()))
+                .customer(findCustomerByName(command.getCustomer()))
                 .orderDate(command.getOrderDate())
                 .deadline(command.getDeadline())
                 .orderType(command.getOrderType())
                 .estimatedMachiningHours(command.getEstimatedMachiningHours())
                 .status(INITIAL_JOB_STATUS)
                 .build();
+    }
+
+    private Customer findCustomerByName(String customerName){
+        return customerRepository.findByNameWithJobs(customerName)
+                .orElseThrow(()-> new CustomerNotFoundException(customerName));
     }
 
     private void validateAddMachine(Job job, Machine machine){
