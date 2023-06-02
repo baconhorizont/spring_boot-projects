@@ -28,15 +28,32 @@ Accept: application/json
   "employeeId": "1"
 }
 
+### SAVE NEW CUSTOMER
+POST http://localhost:8080/api/customers
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Euroform Kft",
+  "vatNumber": "123456789",
+  "registrationDate": "2020-05-10",
+  "country": "Hungary",
+  "postalCode": "2121",
+  "city": "Budapest",
+  "street": "Gyömrői",
+  "streetNumber": "55",
+  "currency": "EUR"
+}
+
 ### SAVE NEW JOB
 POST http://localhost:8080/api/jobs
 Content-Type: application/json
 Accept: application/json
 
 {
-  "customer": "Robert Bosch Gmbh",
+  "customer": "Euroform Kft",
   "orderDate": "2022-05-10",
-  "deadline": "2023-05-01",
+  "deadline": "2023-07-01",
   "orderType": "STANDARD",
   "estimatedMachiningHours": 250
 }
@@ -47,7 +64,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "jobId": "3",
+  "jobId": "1",
   "machineId": "1"
 }
 
@@ -67,7 +84,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "jobId": "2",
+  "jobId": "1",
   "machineId": "1",
   "hours": 10
 }
