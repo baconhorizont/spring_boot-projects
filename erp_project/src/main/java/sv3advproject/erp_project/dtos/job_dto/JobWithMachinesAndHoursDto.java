@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.ToString;
 import sv3advproject.erp_project.dtos.customer_dto.CustomerDto;
 import sv3advproject.erp_project.dtos.machine_dto.MachineDto;
-import sv3advproject.erp_project.models.Customer;
 import sv3advproject.erp_project.models.JobStatus;
 import sv3advproject.erp_project.models.MachineType;
 import sv3advproject.erp_project.models.OrderType;
