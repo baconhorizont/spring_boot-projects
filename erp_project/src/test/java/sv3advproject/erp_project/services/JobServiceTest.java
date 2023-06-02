@@ -13,6 +13,8 @@ import sv3advproject.erp_project.exceptions.MachineNotAddedException;
 import sv3advproject.erp_project.mappers.EmployeeMapperImpl;
 import sv3advproject.erp_project.mappers.JobMapperImpl;
 import sv3advproject.erp_project.models.*;
+import sv3advproject.erp_project.models.Currency;
+import sv3advproject.erp_project.repository.CustomerRepository;
 import sv3advproject.erp_project.repository.JobRepository;
 import sv3advproject.erp_project.repository.MachineRepository;
 
@@ -31,10 +33,15 @@ class JobServiceTest {
     JobRepository jobRepository;
     @Mock
     MachineRepository machineRepository;
+
+    @Mock
+    CustomerRepository customerRepository;
+
     @InjectMocks
-    JobService jobService = new JobService(jobRepository,machineRepository,new JobMapperImpl(),new EmployeeMapperImpl());
+    JobService jobService = new JobService(jobRepository,customerRepository,machineRepository,new JobMapperImpl(),new EmployeeMapperImpl());
 
     Machine machine;
+    Customer customer;
     Job job;
 
     AddMachiningHoursCommand addMachiningHoursCommand;
@@ -48,9 +55,19 @@ class JobServiceTest {
                 .runningJob(new TreeSet<>())
                 .build();
 
+        customer = Customer.builder()
+                .id(1L)
+                .name("Robert Bosch Kft")
+                .vatNumber("123456789")
+                .registrationDate(LocalDate.now().minusYears(1))
+                .address(new Address("Hungary","1213","Budapest","Gyömrői út","128"))
+                .currency(Currency.EUR)
+                .jobs(new HashSet<>())
+                .build();
+
         job = Job.builder()
                 .id(1L)
-                .customer("Robert Bosch Kft")
+                .customer(customer)
                 .orderDate(LocalDate.now().minusDays(1))
                 .deadline(LocalDate.now().plusMonths(1))
                 .orderType(OrderType.STANDARD)
@@ -81,7 +98,7 @@ class JobServiceTest {
 
         JobWithMachiningHoursDto result = jobService.addMachiningHours(addMachiningHoursCommand);
 
-        assertEquals("Robert Bosch Kft",result.getCustomer());
+        assertEquals("Robert Bosch Kft",result.getCustomer().getName());
         assertEquals(1250000,result.getCost());
         assertEquals(50,result.getSpentMachiningHours());
         assertThat(result.getSpentMachiningHoursByType())

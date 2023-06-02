@@ -21,7 +21,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "vat_number")
     private String vatNumber;
+    @Column(name = "registration_date")
     private LocalDate registrationDate;
     private Address address;
     @Enumerated(EnumType.STRING)

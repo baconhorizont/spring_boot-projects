@@ -3,6 +3,7 @@ package sv3advproject.erp_project.dtos.customer_dto;
 import lombok.Data;
 import lombok.ToString;
 import sv3advproject.erp_project.dtos.job_dto.JobDto;
+import sv3advproject.erp_project.dtos.job_dto.JobWithoutCustomerDto;
 import sv3advproject.erp_project.models.Address;
 import sv3advproject.erp_project.models.Currency;
 
@@ -19,5 +20,5 @@ public class CustomerWithJobsDto {
     private Address address;
     private Currency currency;
     @ToString.Exclude
-    private Set<JobDto> jobs;
+    private Set<JobWithoutCustomerDto> jobs;
 }

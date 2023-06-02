@@ -2,6 +2,7 @@ package sv3advproject.erp_project.dtos.job_dto;
 
 import lombok.Data;
 import lombok.ToString;
+import sv3advproject.erp_project.dtos.customer_dto.CustomerDto;
 import sv3advproject.erp_project.models.Customer;
 import sv3advproject.erp_project.models.JobStatus;
 import sv3advproject.erp_project.models.MachineType;
@@ -14,7 +15,7 @@ import java.util.Map;
 public class JobWithMachiningHoursDto {
 
     private Long id;
-    private Customer customer;
+    private CustomerDto customer;
     private LocalDate orderDate;
     private LocalDate deadline;
     private OrderType orderType;

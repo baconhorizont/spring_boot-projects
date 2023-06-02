@@ -17,11 +17,23 @@ class JobTest {
     Job jobStandard;
     Job jobPriority;
 
+    Customer customer;
+
     @BeforeEach
     void init(){
+        customer = Customer.builder()
+                .id(1L)
+                .name("Robert Bosch Kft")
+                .vatNumber("123456789")
+                .registrationDate(LocalDate.now().minusYears(1))
+                .address(new Address("Hungary","1213","Budapest","Gyömrői út","128"))
+                .currency(Currency.EUR)
+                .jobs(new HashSet<>())
+                .build();
+
         jobStandard = Job.builder()
                 .id(1L)
-                .customer("Robert Bosch Kft")
+                .customer(customer)
                 .orderDate(LocalDate.now().minusDays(1))
                 .deadline(LocalDate.now().plusMonths(1))
                 .orderType(OrderType.STANDARD)
@@ -33,8 +45,8 @@ class JobTest {
         jobStandard.addMachine(Machine.builder().name("Hermle").type(MachineType.MILL).runningJob(new TreeSet<>()).build());
 
         jobPriority = Job.builder()
-                .id(1L)
-                .customer("Robert Bosch Kft")
+                .id(2L)
+                .customer(customer)
                 .orderDate(LocalDate.now().minusDays(1))
                 .deadline(LocalDate.now().plusMonths(1))
                 .orderType(OrderType.PRIORITY)
