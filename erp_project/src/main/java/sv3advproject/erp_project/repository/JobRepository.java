@@ -13,8 +13,8 @@ import java.util.Optional;
 
 public interface JobRepository extends JpaRepository<Job,Long> {
 
-    @Query("select j from Job j where (:customer is null or j.customer like %:customer%) and (:jobStatus is null or j.status = :jobStatus)")
-    List<Job> findByCustomerAndStatus(@Param("customer") Optional<String> customer,@Param("jobStatus") Optional<JobStatus> jobStatus);
+    @Query("select j from Job j where (:customerName is null or j.customer.name like %:customerName%) and (:jobStatus is null or j.status = :jobStatus)")
+    List<Job> findByCustomerAndStatus(@Param("customerName") Optional<String> customerName,@Param("jobStatus") Optional<JobStatus> jobStatus);
     @Query("select distinct m from Machine m left join fetch m.runningJob j where j.id = :jobId")
     List<Machine> findJobByIdMadeByEmployee(@Param("jobId") long jobId);
     @Query("select distinct j from Job j left join fetch j.machinedOn m where m.id = :machineId order by j.deadline")

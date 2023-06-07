@@ -40,11 +40,11 @@ public class JobController {
     public List<JobDto> listAllJob(
             @Parameter(description = "Name of customer",
             example = "Denso")
-            @RequestParam Optional<String> customer,
+            @RequestParam Optional<String> customerName,
             @Parameter(description = "Status of the job",
                     example = "RUNNING")
             @RequestParam Optional<JobStatus> jobStatus){
-        return jobService.listAllJob(customer,jobStatus);
+        return jobService.listAllJob(customerName,jobStatus);
     }
 
     @PostMapping("/addMachine")

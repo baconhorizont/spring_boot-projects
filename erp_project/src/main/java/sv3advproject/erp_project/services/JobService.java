@@ -36,8 +36,8 @@ public class JobService {
         return jobMapper.toDto(job);
     }
 
-    public List<JobDto> listAllJob(Optional<String> customer, Optional<JobStatus> jobStatus) {
-        return jobMapper.toDto(jobRepository.findByCustomerAndStatus(customer,jobStatus));
+    public List<JobDto> listAllJob(Optional<String> customerName, Optional<JobStatus> jobStatus) {
+        return jobMapper.toDto(jobRepository.findByCustomerAndStatus(customerName,jobStatus));
     }
 
     @Transactional
