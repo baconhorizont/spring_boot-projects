@@ -2,7 +2,6 @@ package sv3advproject.erp_project.dtos.customer_dto;
 
 import lombok.Data;
 import lombok.ToString;
-import sv3advproject.erp_project.dtos.job_dto.JobDto;
 import sv3advproject.erp_project.dtos.job_dto.JobWithoutCustomerDto;
 import sv3advproject.erp_project.models.Address;
 import sv3advproject.erp_project.models.Currency;
