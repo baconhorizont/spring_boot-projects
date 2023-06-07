@@ -807,7 +807,7 @@ class JobControllerTestIT {
                         .postalCode("2121")
                         .streetNumber("12")
                         .currency(Currency.EUR)
-                        .vatNumber("123456789")
+                        .vatNumber("8464721390")
                         .registrationDate(LocalDate.now().minusYears(5))
                         .build())
                 .exchange()

@@ -1,5 +1,6 @@
 package sv3advproject.erp_project.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class CustomerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CustomerDto saveCustomer(@RequestBody CreateCustomerCommand command){
+    public CustomerDto saveCustomer(@Valid @RequestBody CreateCustomerCommand command){
         return customerService.saveCustomer(command);
     }
 
