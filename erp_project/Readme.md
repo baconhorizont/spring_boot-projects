@@ -1,4 +1,4 @@
-# Vizsgaremek ERP project
+# ERP project
 
 ## Leírás
 
