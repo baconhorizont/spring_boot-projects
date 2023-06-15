@@ -18,12 +18,15 @@ public class CreateCustomerCommand {
     private String vatNumber;
     @PastOrPresent(message = "Registration date must be past or present!")
     private LocalDate registrationDate;
+    @NotBlank(message = "Customer country must not blank")
     @Pattern(regexp = "^[a-zA-Z ÁÉÍÓÖŐÚÜŰáéíóöőúüű]+$",message = "Invalid country name!")
     private String country;
     @Digits(integer = 8, fraction = 0,message = "Invalid postal code!")
     private String postalCode;
+    @NotBlank(message = "Customer city must not blank")
     @Pattern(regexp = "^[a-zA-Z ÁÉÍÓÖŐÚÜŰáéíóöőúüű]+$",message = "Invalid city name!")
     private String city;
+    @NotBlank(message = "Customer street must not blank")
     @Pattern(regexp = "^[a-zA-Z ÁÉÍÓÖŐÚÜŰáéíóöőúüű0-9]+$",message = "Invalid street name!")
     private String street;
     @Pattern(regexp = "^[a-zA-Z0-9]+$",message = "Invalid street number!")
