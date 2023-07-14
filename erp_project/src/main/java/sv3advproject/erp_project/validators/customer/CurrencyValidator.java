@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 
 import java.util.Arrays;
 
-public class CurrencyValidator implements ConstraintValidator<Currency, sv3advproject.erp_project.models.Currency> {
+public class CurrencyValidator implements ConstraintValidator<CurrencyValid, sv3advproject.erp_project.models.Currency> {
 
     private sv3advproject.erp_project.models.Currency[] subset;
 
@@ -15,7 +15,7 @@ public class CurrencyValidator implements ConstraintValidator<Currency, sv3advpr
     }
 
     @Override
-    public void initialize(Currency constraintAnnotation) {
+    public void initialize(CurrencyValid constraintAnnotation) {
         this.subset = constraintAnnotation.anyOf();
     }
 }

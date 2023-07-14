@@ -3,7 +3,8 @@ package sv3advproject.erp_project.dtos.customer_dto;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
 import lombok.Data;
-import sv3advproject.erp_project.validators.customer.Currency;
+import sv3advproject.erp_project.models.Currency;
+import sv3advproject.erp_project.validators.customer.CurrencyValid;
 import sv3advproject.erp_project.validators.customer.VatNumber;
 
 import java.time.LocalDate;
@@ -31,6 +32,6 @@ public class CreateCustomerCommand {
     private String street;
     @Pattern(regexp = "^[a-zA-Z0-9]+$",message = "Invalid street number!")
     private String streetNumber;
-    @Currency(anyOf = {sv3advproject.erp_project.models.Currency.HUF, sv3advproject.erp_project.models.Currency.EUR})
+    @CurrencyValid(anyOf = {Currency.HUF, Currency.EUR})
     private sv3advproject.erp_project.models.Currency currency;
 }
