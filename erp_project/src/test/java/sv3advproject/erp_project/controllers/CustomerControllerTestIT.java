@@ -11,9 +11,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import sv3advproject.erp_project.dtos.customer_dto.CreateCustomerCommand;
 import sv3advproject.erp_project.dtos.customer_dto.CustomerDto;
 import sv3advproject.erp_project.dtos.customer_dto.CustomerWithJobsDto;
-import sv3advproject.erp_project.dtos.job_dto.CreateJobCommand;
 import sv3advproject.erp_project.models.Currency;
-import sv3advproject.erp_project.models.OrderType;
 
 import java.net.URI;
 import java.time.LocalDate;
